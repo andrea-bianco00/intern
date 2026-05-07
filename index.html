@@ -74,13 +74,15 @@
       font-size: 17px;
     }
 
-    .toc a {
+    .toc a,
+    .plot-list a {
       color: #2563eb;
       font-weight: bold;
       text-decoration: none;
     }
 
-    .toc a:hover {
+    .toc a:hover,
+    .plot-list a:hover {
       text-decoration: underline;
     }
 
@@ -114,16 +116,6 @@
       margin: 8px 0;
     }
 
-    .plot-list a {
-      color: #2563eb;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .plot-list a:hover {
-      text-decoration: underline;
-    }
-
     .scenario-block {
       margin-top: 18px;
       padding: 14px 16px;
@@ -146,14 +138,6 @@
     .placeholder {
       color: #6b7280;
       font-style: italic;
-    }
-
-    .note {
-      margin-top: 35px;
-      padding: 16px;
-      border-left: 4px solid #2563eb;
-      background: #eff6ff;
-      color: #1e3a8a;
     }
 
     .back-to-top {
@@ -183,7 +167,7 @@
     <h2>Contents</h2>
 
     <ol>
-      <li><a href="#data-generation">Data Generation</a></li>
+      <li><a href="#data-generation">Different Scenarios</a></li>
       <li><a href="#mean-function-estimation">Mean function estimation</a></li>
       <li><a href="#error-variance-estimation">Error variance estimation</a></li>
       <li><a href="#variance-function-estimation">Variance function estimation</a></li>
@@ -193,10 +177,6 @@
   </div>
 
 
-  <!-- ===================================================== -->
-  <!-- DATA GENERATION -->
-  <!-- ===================================================== -->
-
   <div class="section-card" id="data-generation">
 
     <h2>1. Different Scenarios</h2>
@@ -205,25 +185,18 @@
       This section presents the different scenarios considered in the simulation study. The aim of this section is to provide a clearer understanding of the different simulation settings considered throughout the study. To better interpret the estimation results presented in the following sections, we first visualize the true underlying functional components for each scenario, including the mean and covariance structures. This preliminary overview helps illustrate the complexity and characteristics of the data-generating mechanisms under consideration.
     </p>
 
-
     <div class="plot-list">
 
       <h3>Different Scenarios</h3>
-
-
-      <!-- ========================= -->
-      <!-- MEAN FUNCTIONS -->
-      <!-- ========================= -->
 
       <div class="scenario-block">
 
         <h4>Mean Functions</h4>
 
         <ul>
-
           <li>
             <a href="plots/0_data_generation/real_mean_functions.html">
-              \( \mu_1(t) = \text{formula mean 1} \)
+              \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
             </a>
           </li>
 
@@ -232,99 +205,84 @@
               \( \mu_2(t) = \text{formula mean 2} \)
             </a>
           </li>
-
         </ul>
 
       </div>
-
-
-      <!-- ========================= -->
-      <!-- COVARIANCE SCENARIOS -->
-      <!-- ========================= -->
 
       <div class="scenario-block">
 
         <h4>Covariance Scenarios</h4>
 
         <ul>
-
-          <!-- Scenario I -->
-
           <li>
-
             <a href="plots/0_data_generation/covariance_scenario_I.html">
               <strong>Covariance Scenario I</strong>
             </a>
 
             <div class="cov-formula">
               Variance function:
-              \( V_1(t) = \text{formula variance function 1} \)
+              \( \sigma_X^2(t) = \sqrt{t} \exp\left(-\frac{(t - 0.1)^2}{10}\right) + 1 \)
             </div>
 
             <div class="cov-formula">
-              Correlation function:
-              \( R_1(s,t) = \text{formula correlation function 1} \)
+              Matern correlation function:
+              \( Corr_{\theta=(0.5,1)}(s,t)=\exp(-|s-t|) \)
             </div>
 
             <div class="cov-formula">
               Covariance function:
-              \( C_1(s,t) = \text{formula covariance function 1} \)
+              \( C(s,t)=\sqrt{\sigma_X^2(s)}\,\sqrt{\sigma_X^2(t)}\,Corr_{\theta=(0.5,1)}(s,t)=\sqrt{\sqrt{s}\exp\left(-\frac{(s-0.1)^2}{10}\right)+1}\,\sqrt{\sqrt{t}\exp\left(-\frac{(t-0.1)^2}{10}\right)+1}\,\exp(-|s-t|) \)
             </div>
-
           </li>
 
-
-          <!-- Scenario II -->
-
           <li style="margin-top: 22px;">
-
             <a href="plots/0_data_generation/covariance_scenario_II.html">
               <strong>Covariance Scenario II</strong>
             </a>
 
             <div class="cov-formula">
-              Variance function:
-              \( V_2(t) = \text{formula variance function 2} \)
+              Fourier basis functions:
+              \( \phi_k(t) = \sqrt{2}\sin\left(2 \pi k t\right) \)
             </div>
 
             <div class="cov-formula">
-              Correlation function:
-              \( R_2(s,t) = \text{formula correlation function 2} \)
+              Variance function:
+              \( \sigma_X^2(t)=\sum_{k=1}^{50}2k^{-2}\phi_k^2(t) \)
             </div>
 
             <div class="cov-formula">
               Covariance function:
-              \( C_2(s,t) = \text{formula covariance function 2} \)
+              \( C(s,t)=\sum_{k=1}^{50}2k^{-2}\phi_k(s)\phi_k(t) \)
+            </div>
+
+            <div class="cov-formula">
+              Correlation function:
+              \( Corr(s,t)=\dfrac{C(s,t)}{\sqrt{\sigma_X^2(s)\sigma_X^2(t)}} \)
             </div>
 
           </li>
 
-
-          <!-- Scenario III -->
-
           <li style="margin-top: 22px;">
-
             <a href="plots/0_data_generation/covariance_scenario_III.html">
               <strong>Covariance Scenario III</strong>
             </a>
 
             <div class="cov-formula">
               Variance function:
-              \( V_3(t) = \text{formula variance function 3} \)
-            </div>
-
-            <div class="cov-formula">
-              Correlation function:
-              \( R_3(s,t) = \text{formula correlation function 3} \)
+              \( \sigma_X^2(t)=\sum_{j=1}^{5}\sum_{k=1}^{5}\frac{e^{-|j-k|}}{5}\phi_j(t)\phi_k(t) \)
             </div>
 
             <div class="cov-formula">
               Covariance function:
-              \( C_3(s,t) = \text{formula covariance function 3} \)
+              \( C(s,t)=\sum_{j=1}^{5}\sum_{k=1}^{5}\frac{e^{-|j-k|}}{5}\phi_j(s)\phi_k(t) \)
+            </div>
+
+            <div class="cov-formula">
+              Correlation function:
+              \( Corr(s,t)=\dfrac{C(s,t)}{\sqrt{\sigma_X^2(s)\sigma_X^2(t)}} \)
             </div>
 
           </li>
-
         </ul>
 
       </div>
@@ -336,25 +294,97 @@
   </div>
 
 
-  <!-- ===================================================== -->
-  <!-- MEAN FUNCTION ESTIMATION -->
-  <!-- ===================================================== -->
-
   <div class="section-card" id="mean-function-estimation">
 
     <h2>2. Mean function estimation</h2>
 
     <p>
-      The comparison reports the estimation of the true mean function across different mean-function settings, ranging from easier to more challenging cases, and across several covariance scenarios, including those taken from Lin and Wang (2022) as well as additional scenarios considered in this study.
+      The comparison reports the estimation of the true mean function across different mean-function settings, ranging from easier to more challenging cases, and across different covariance scenarios.
     </p>
 
     <div class="plot-list">
 
-      <h3>Different Scenarios</h3>
+      <h3>Mean estimation plots</h3>
 
-      <p class="placeholder">
-        Plots to be added.
+      <p>
+        Each interactive plot compares the true mean function with the estimates obtained using the paper method and the spline method.
       </p>
+
+      <div class="scenario-block">
+
+        <h4>
+          Mean function:
+          \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
+        </h4>
+
+        <ul>
+          <li>
+            <a href="plots/1_mean_estimation/mean_estimation_cov_I.html">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula">
+              
+            </span>
+          </li>
+
+          <li>
+            <a href="plots/1_mean_estimation/mean_estimation_cov_II.html">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula">
+              
+            </span>
+          </li>
+
+          <li>
+            <a href="plots/1_mean_estimation/mean_estimation_cov_III.html">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula">
+              
+            </span>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="scenario-block">
+
+        <h4>
+          Mean function:
+          \( \mu_2(t) = \text{formula mean 2} \)
+        </h4>
+
+        <ul>
+          <li>
+            <a href="plots/1_mean_estimation/mean_estimation_mu2_cov_I.html">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula">
+              
+            </span>
+          </li>
+
+          <li>
+            <a href="plots/1_mean_estimation/mean_estimation_mu2_cov_II.html">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula">
+              
+            </span>
+          </li>
+
+          <li>
+            <a href="plots/1_mean_estimation/mean_estimation_mu2_cov_III.html">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula">
+              
+            </span>
+          </li>
+        </ul>
+
+      </div>
 
     </div>
 
@@ -362,10 +392,6 @@
 
   </div>
 
-
-  <!-- ===================================================== -->
-  <!-- ERROR VARIANCE -->
-  <!-- ===================================================== -->
 
   <div class="section-card" id="error-variance-estimation">
 
@@ -390,10 +416,6 @@
   </div>
 
 
-  <!-- ===================================================== -->
-  <!-- VARIANCE FUNCTION -->
-  <!-- ===================================================== -->
-
   <div class="section-card" id="variance-function-estimation">
 
     <h2>4. Variance function estimation</h2>
@@ -417,10 +439,6 @@
   </div>
 
 
-  <!-- ===================================================== -->
-  <!-- CORRELATION PARAMETERS -->
-  <!-- ===================================================== -->
-
   <div class="section-card" id="correlation-parameter-estimation">
 
     <h2>5. Estimation of the parameters of the correlation function</h2>
@@ -443,10 +461,6 @@
 
   </div>
 
-
-  <!-- ===================================================== -->
-  <!-- COVARIANCE -->
-  <!-- ===================================================== -->
 
   <div class="section-card" id="covariance-estimation">
 
