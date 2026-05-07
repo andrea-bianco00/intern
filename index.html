@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <title>Interactive Internship Results</title>
 
+  <!-- MathJax for LaTeX formulas -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']]
+      }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -28,6 +38,12 @@
     h3 {
       color: #1f2937;
       margin-bottom: 8px;
+    }
+
+    h4 {
+      color: #111827;
+      margin: 18px 0 8px 0;
+      font-size: 17px;
     }
 
     .subtitle {
@@ -91,7 +107,7 @@
 
     .plot-list ul {
       margin: 8px 0 0 0;
-      padding-left: 20px;
+      padding-left: 22px;
     }
 
     .plot-list li {
@@ -106,6 +122,24 @@
 
     .plot-list a:hover {
       text-decoration: underline;
+    }
+
+    .scenario-block {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+    }
+
+    .scenario-block:first-of-type {
+      margin-top: 12px;
+    }
+
+    .cov-formula {
+      color: #4b5563;
+      margin-left: 6px;
+      font-size: 15px;
     }
 
     .placeholder {
@@ -141,18 +175,18 @@
   <h1>Interactive Internship Results</h1>
 
   <p class="subtitle">
-    This page collects the main interactive plots produced during the internship
-    on sparse functional data analysis. The results are organized by estimation task.
+    This page brings together the main plots produced during the internship. The results are organized according to the following structure:
   </p>
 
   <div class="toc">
     <h2>Contents</h2>
     <ol>
+      <li><a href="#data-generation">Data Generation</a></li>
       <li><a href="#mean-function-estimation">Mean function estimation</a></li>
       <li><a href="#error-variance-estimation">Error variance estimation</a></li>
       <li><a href="#variance-function-estimation">Variance function estimation</a></li>
       <li><a href="#correlation-parameter-estimation">Estimation of the parameters of the correlation function</a></li>
-      <li><a href="#covariance-estimation">Covariance estimation</a></li>
+      <li><a href="#covariance-estimation">Covariance function estimation</a></li>
     </ol>
   </div>
 
@@ -161,18 +195,73 @@
     <h2>1. Mean function estimation</h2>
 
     <p>
-      This section contains the interactive plots related to the estimation of the mean function.
-      The comparison includes the true mean function and the estimated mean functions obtained with
-      the different methods considered in the simulation study.
+      The comparison reports the estimation of the true mean function across different mean-function settings, ranging from easier to more challenging cases, and across several covariance scenarios, including those taken from Lin and Wang (2022) as well as additional scenarios considered in this study.
     </p>
 
     <div class="plot-list">
-      <h3>Available plots</h3>
-      <ul>
-        <li><a href="plots/mean_estimation_cov_I.html">Covariance scenario I</a></li>
-        <li><a href="plots/mean_estimation_cov_II.html">Covariance scenario II</a></li>
-        <li><a href="plots/mean_estimation_cov_III.html">Covariance scenario III</a></li>
-      </ul>
+      <h3>Different Scenarios</h3>
+
+      <div class="scenario-block">
+        <h4>
+          Mean function:
+          \( \mu_1(t) = \text{formula1} \)
+        </h4>
+
+        <ul>
+          <li>
+            <a href="plots/mean_estimation_mu1_cov_I.html">Covariance scenario I</a>
+            <span class="cov-formula">
+              \( C_I(s,t) = \text{formula} \)
+            </span>
+          </li>
+
+          <li>
+            <a href="plots/mean_estimation_mu1_cov_II.html">Covariance scenario II</a>
+            <span class="cov-formula">
+              \( C_{II}(s,t) = \text{formula} \)
+            </span>
+          </li>
+
+          <li>
+            <a href="plots/mean_estimation_mu1_cov_III.html">Covariance scenario III</a>
+            <span class="cov-formula">
+              \( C_{III}(s,t) = \text{formula} \)
+            </span>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="scenario-block">
+        <h4>
+          Mean function:
+          \( \mu_2(t) = \text{formula2} \)
+        </h4>
+
+        <ul>
+          <li>
+            <a href="plots/mean_estimation_mu2_cov_I.html">Covariance scenario I</a>
+            <span class="cov-formula">
+              \( C_I(s,t) = \text{formula} \)
+            </span>
+          </li>
+
+          <li>
+            <a href="plots/mean_estimation_mu2_cov_II.html">Covariance scenario II</a>
+            <span class="cov-formula">
+              \( C_{II}(s,t) = \text{formula} \)
+            </span>
+          </li>
+
+          <li>
+            <a href="plots/mean_estimation_mu2_cov_III.html">Covariance scenario III</a>
+            <span class="cov-formula">
+              \( C_{III}(s,t) = \text{formula} \)
+            </span>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
@@ -188,7 +277,7 @@
     </p>
 
     <div class="plot-list">
-      <h3>Available plots</h3>
+      <h3>Different Scenarios</h3>
       <p class="placeholder">
         Plots to be added.
       </p>
@@ -207,7 +296,7 @@
     </p>
 
     <div class="plot-list">
-      <h3>Available plots</h3>
+      <h3>Different Scenarios</h3>
       <p class="placeholder">
         Plots to be added.
       </p>
@@ -226,7 +315,7 @@
     </p>
 
     <div class="plot-list">
-      <h3>Available plots</h3>
+      <h3>Different Scenarios</h3>
       <p class="placeholder">
         Plots to be added.
       </p>
@@ -245,7 +334,7 @@
     </p>
 
     <div class="plot-list">
-      <h3>Available plots</h3>
+      <h3>Different Scenarios</h3>
       <p class="placeholder">
         Plots to be added.
       </p>
