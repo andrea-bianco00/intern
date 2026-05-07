@@ -140,6 +140,7 @@
       color: #4b5563;
       margin-left: 6px;
       font-size: 15px;
+      margin-top: 4px;
     }
 
     .placeholder {
@@ -180,6 +181,7 @@
 
   <div class="toc">
     <h2>Contents</h2>
+
     <ol>
       <li><a href="#data-generation">Data Generation</a></li>
       <li><a href="#mean-function-estimation">Mean function estimation</a></li>
@@ -191,26 +193,149 @@
   </div>
 
 
+  <!-- ===================================================== -->
+  <!-- DATA GENERATION -->
+  <!-- ===================================================== -->
+
   <div class="section-card" id="data-generation">
-    <h2>1. Data Generation</h2>
+
+    <h2>1. Different Scenarios</h2>
 
     <p>
-      This section presents the data-generation setting used in the simulation study. The aim is to describe the main ingredients of the generated functional data, including the mean functions, covariance scenarios, sampling design, sample sizes and noise levels considered in the experiments.
+      This section presents the different scenarios considered in the simulation study. The aim of this section is to provide a clearer understanding of the different simulation settings considered throughout the study. To better interpret the estimation results presented in the following sections, we first visualize the true underlying functional components for each scenario, including the mean and covariance structures. This preliminary overview helps illustrate the complexity and characteristics of the data-generating mechanisms under consideration.
     </p>
 
+
     <div class="plot-list">
+
       <h3>Different Scenarios</h3>
 
-      <p class="placeholder">
-        Plots to be added.
-      </p>
+
+      <!-- ========================= -->
+      <!-- MEAN FUNCTIONS -->
+      <!-- ========================= -->
+
+      <div class="scenario-block">
+
+        <h4>Mean Functions</h4>
+
+        <ul>
+
+          <li>
+            <a href="plots/real_mean_mu1.html">
+              \( \mu_1(t) = \text{formula mean 1} \)
+            </a>
+          </li>
+
+          <li>
+            <a href="plots/real_mean_mu2.html">
+              \( \mu_2(t) = \text{formula mean 2} \)
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- ========================= -->
+      <!-- COVARIANCE SCENARIOS -->
+      <!-- ========================= -->
+
+      <div class="scenario-block">
+
+        <h4>Covariance Scenarios</h4>
+
+        <ul>
+
+          <!-- Scenario I -->
+
+          <li>
+
+            <strong>Covariance Scenario I</strong>
+
+            <div class="cov-formula">
+              Variance function:
+              \( V_1(t) = \text{formula variance function 1} \)
+            </div>
+
+            <div class="cov-formula">
+              Correlation function:
+              \( R_1(s,t) = \text{formula correlation function 1} \)
+            </div>
+
+            <div class="cov-formula">
+              Covariance function:
+              \( C_1(s,t) = \text{formula covariance function 1} \)
+            </div>
+
+          </li>
+
+
+          <!-- Scenario II -->
+
+          <li style="margin-top: 22px;">
+
+            <strong>Covariance Scenario II</strong>
+
+            <div class="cov-formula">
+              Variance function:
+              \( V_2(t) = \text{formula variance function 2} \)
+            </div>
+
+            <div class="cov-formula">
+              Correlation function:
+              \( R_2(s,t) = \text{formula correlation function 2} \)
+            </div>
+
+            <div class="cov-formula">
+              Covariance function:
+              \( C_2(s,t) = \text{formula covariance function 2} \)
+            </div>
+
+          </li>
+
+
+          <!-- Scenario III -->
+
+          <li style="margin-top: 22px;">
+
+            <strong>Covariance Scenario III</strong>
+
+            <div class="cov-formula">
+              Variance function:
+              \( V_3(t) = \text{formula variance function 3} \)
+            </div>
+
+            <div class="cov-formula">
+              Correlation function:
+              \( R_3(s,t) = \text{formula correlation function 3} \)
+            </div>
+
+            <div class="cov-formula">
+              Covariance function:
+              \( C_3(s,t) = \text{formula covariance function 3} \)
+            </div>
+
+          </li>
+
+        </ul>
+
+      </div>
+
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
+
   </div>
 
 
+  <!-- ===================================================== -->
+  <!-- MEAN FUNCTION ESTIMATION -->
+  <!-- ===================================================== -->
+
   <div class="section-card" id="mean-function-estimation">
+
     <h2>2. Mean function estimation</h2>
 
     <p>
@@ -218,148 +343,125 @@
     </p>
 
     <div class="plot-list">
+
       <h3>Different Scenarios</h3>
 
-      <div class="scenario-block">
-        <h4>
-          Mean function:
-          \( \mu_1(t) = \text{formula1} \)
-        </h4>
-
-        <ul>
-          <li>
-            <a href="plots/mean_estimation_mu1_cov_I.html">Covariance scenario I</a>
-            <span class="cov-formula">
-              \( C_I(s,t) = \text{formula} \)
-            </span>
-          </li>
-
-          <li>
-            <a href="plots/mean_estimation_mu1_cov_II.html">Covariance scenario II</a>
-            <span class="cov-formula">
-              \( C_{II}(s,t) = \text{formula} \)
-            </span>
-          </li>
-
-          <li>
-            <a href="plots/mean_estimation_mu1_cov_III.html">Covariance scenario III</a>
-            <span class="cov-formula">
-              \( C_{III}(s,t) = \text{formula} \)
-            </span>
-          </li>
-        </ul>
-      </div>
-
-
-      <div class="scenario-block">
-        <h4>
-          Mean function:
-          \( \mu_2(t) = \text{formula2} \)
-        </h4>
-
-        <ul>
-          <li>
-            <a href="plots/mean_estimation_mu2_cov_I.html">Covariance scenario I</a>
-            <span class="cov-formula">
-              \( C_I(s,t) = \text{formula} \)
-            </span>
-          </li>
-
-          <li>
-            <a href="plots/mean_estimation_mu2_cov_II.html">Covariance scenario II</a>
-            <span class="cov-formula">
-              \( C_{II}(s,t) = \text{formula} \)
-            </span>
-          </li>
-
-          <li>
-            <a href="plots/mean_estimation_mu2_cov_III.html">Covariance scenario III</a>
-            <span class="cov-formula">
-              \( C_{III}(s,t) = \text{formula} \)
-            </span>
-          </li>
-        </ul>
-      </div>
+      <p class="placeholder">
+        Plots to be added.
+      </p>
 
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
+
   </div>
 
 
+  <!-- ===================================================== -->
+  <!-- ERROR VARIANCE -->
+  <!-- ===================================================== -->
+
   <div class="section-card" id="error-variance-estimation">
+
     <h2>3. Error variance estimation</h2>
 
     <p>
-      This section will contain the interactive plots related to the estimation of the measurement
-      error variance.
+      This section will contain the interactive plots related to the estimation of the measurement error variance.
     </p>
 
     <div class="plot-list">
+
       <h3>Different Scenarios</h3>
+
       <p class="placeholder">
         Plots to be added.
       </p>
+
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
+
   </div>
 
 
+  <!-- ===================================================== -->
+  <!-- VARIANCE FUNCTION -->
+  <!-- ===================================================== -->
+
   <div class="section-card" id="variance-function-estimation">
+
     <h2>4. Variance function estimation</h2>
 
     <p>
-      This section will contain the interactive plots related to the estimation of the marginal
-      variance function.
+      This section will contain the interactive plots related to the estimation of the marginal variance function.
     </p>
 
     <div class="plot-list">
+
       <h3>Different Scenarios</h3>
+
       <p class="placeholder">
         Plots to be added.
       </p>
+
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
+
   </div>
 
 
+  <!-- ===================================================== -->
+  <!-- CORRELATION PARAMETERS -->
+  <!-- ===================================================== -->
+
   <div class="section-card" id="correlation-parameter-estimation">
+
     <h2>5. Estimation of the parameters of the correlation function</h2>
 
     <p>
-      This section will contain the interactive plots related to the estimation of the parameters
-      of the correlation function.
+      This section will contain the interactive plots related to the estimation of the parameters of the correlation function.
     </p>
 
     <div class="plot-list">
+
       <h3>Different Scenarios</h3>
+
       <p class="placeholder">
         Plots to be added.
       </p>
+
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
+
   </div>
 
 
+  <!-- ===================================================== -->
+  <!-- COVARIANCE -->
+  <!-- ===================================================== -->
+
   <div class="section-card" id="covariance-estimation">
+
     <h2>6. Covariance estimation</h2>
 
     <p>
-      This section will contain the interactive plots related to the estimation of the covariance
-      function.
+      This section will contain the interactive plots related to the estimation of the covariance function.
     </p>
 
     <div class="plot-list">
+
       <h3>Different Scenarios</h3>
+
       <p class="placeholder">
         Plots to be added.
       </p>
+
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
+
   </div>
 
 </body>
