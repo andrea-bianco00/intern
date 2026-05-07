@@ -1,13 +1,13 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Interactive Mean Estimation Plots</title>
+  <title>Interactive Internship Results</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 950px;
+      max-width: 1050px;
       margin: 40px auto;
       line-height: 1.6;
       color: #222;
@@ -15,81 +15,250 @@
     }
 
     h1 {
-      color: #1f2937;
+      color: #111827;
       margin-bottom: 10px;
+      font-size: 34px;
+    }
+
+    h2 {
+      color: #111827;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: #1f2937;
+      margin-bottom: 8px;
     }
 
     .subtitle {
       color: #555;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
+      font-size: 16px;
     }
 
-    .card {
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      padding: 20px;
-      margin: 18px 0;
+    .toc {
+      border: 1px solid #d1d5db;
+      border-radius: 16px;
+      padding: 24px;
+      margin: 30px 0 40px 0;
       background: #f9fafb;
     }
 
-    .card h2 {
-      margin-top: 0;
-      color: #111827;
+    .toc h2 {
+      margin-bottom: 16px;
     }
 
-    a {
-      display: inline-block;
-      margin-top: 8px;
+    .toc ol {
+      margin: 0;
+      padding-left: 24px;
+    }
+
+    .toc li {
+      margin: 10px 0;
+      font-size: 17px;
+    }
+
+    .toc a {
       color: #2563eb;
       font-weight: bold;
       text-decoration: none;
     }
 
-    a:hover {
+    .toc a:hover {
       text-decoration: underline;
+    }
+
+    .section-card {
+      border: 1px solid #ddd;
+      border-radius: 16px;
+      padding: 24px;
+      margin: 26px 0;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .section-card p {
+      color: #444;
+    }
+
+    .plot-list {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+    }
+
+    .plot-list ul {
+      margin: 8px 0 0 0;
+      padding-left: 20px;
+    }
+
+    .plot-list li {
+      margin: 8px 0;
+    }
+
+    .plot-list a {
+      color: #2563eb;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .plot-list a:hover {
+      text-decoration: underline;
+    }
+
+    .placeholder {
+      color: #6b7280;
+      font-style: italic;
     }
 
     .note {
       margin-top: 35px;
-      padding: 15px;
+      padding: 16px;
       border-left: 4px solid #2563eb;
       background: #eff6ff;
       color: #1e3a8a;
     }
+
+    .back-to-top {
+      display: inline-block;
+      margin-top: 14px;
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .back-to-top:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
-<body>
+<body id="top">
 
-  <h1>Interactive Mean Estimation Plots</h1>
+  <h1>Interactive Internship Results</h1>
 
   <p class="subtitle">
-    Interactive comparison between the true mean function and the three estimated mean functions:
-    paper method, kernel method, and spline method.
+    This page collects the main interactive plots produced during the internship
+    on sparse functional data analysis. The results are organized by estimation task.
   </p>
 
-  <div class="card">
-    <h2>Covariance scenario I</h2>
-    <p>Mean estimation results for covariance scenario I.</p>
-    <a href="plots/mean_estimation_cov_I.html">Open interactive plot</a>
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#mean-function-estimation">Mean function estimation</a></li>
+      <li><a href="#error-variance-estimation">Error variance estimation</a></li>
+      <li><a href="#variance-function-estimation">Variance function estimation</a></li>
+      <li><a href="#correlation-parameter-estimation">Estimation of the parameters of the correlation function</a></li>
+      <li><a href="#covariance-estimation">Covariance estimation</a></li>
+    </ol>
   </div>
 
-  <div class="card">
-    <h2>Covariance scenario II</h2>
-    <p>Mean estimation results for covariance scenario II.</p>
-    <a href="plots/mean_estimation_cov_II.html">Open interactive plot</a>
+
+  <div class="section-card" id="mean-function-estimation">
+    <h2>1. Mean function estimation</h2>
+
+    <p>
+      This section contains the interactive plots related to the estimation of the mean function.
+      The comparison includes the true mean function and the estimated mean functions obtained with
+      the different methods considered in the simulation study.
+    </p>
+
+    <div class="plot-list">
+      <h3>Available plots</h3>
+      <ul>
+        <li><a href="plots/mean_estimation_cov_I.html">Covariance scenario I</a></li>
+        <li><a href="plots/mean_estimation_cov_II.html">Covariance scenario II</a></li>
+        <li><a href="plots/mean_estimation_cov_III.html">Covariance scenario III</a></li>
+      </ul>
+    </div>
+
+    <a class="back-to-top" href="#top">Back to contents</a>
   </div>
 
-  <div class="card">
-    <h2>Covariance scenario III</h2>
-    <p>Mean estimation results for covariance scenario III.</p>
-    <a href="plots/mean_estimation_cov_III.html">Open interactive plot</a>
+
+  <div class="section-card" id="error-variance-estimation">
+    <h2>2. Error variance estimation</h2>
+
+    <p>
+      This section will contain the interactive plots related to the estimation of the measurement
+      error variance.
+    </p>
+
+    <div class="plot-list">
+      <h3>Available plots</h3>
+      <p class="placeholder">
+        Plots to be added.
+      </p>
+    </div>
+
+    <a class="back-to-top" href="#top">Back to contents</a>
   </div>
+
+
+  <div class="section-card" id="variance-function-estimation">
+    <h2>3. Variance function estimation</h2>
+
+    <p>
+      This section will contain the interactive plots related to the estimation of the marginal
+      variance function.
+    </p>
+
+    <div class="plot-list">
+      <h3>Available plots</h3>
+      <p class="placeholder">
+        Plots to be added.
+      </p>
+    </div>
+
+    <a class="back-to-top" href="#top">Back to contents</a>
+  </div>
+
+
+  <div class="section-card" id="correlation-parameter-estimation">
+    <h2>4. Estimation of the parameters of the correlation function</h2>
+
+    <p>
+      This section will contain the interactive plots related to the estimation of the parameters
+      of the correlation function.
+    </p>
+
+    <div class="plot-list">
+      <h3>Available plots</h3>
+      <p class="placeholder">
+        Plots to be added.
+      </p>
+    </div>
+
+    <a class="back-to-top" href="#top">Back to contents</a>
+  </div>
+
+
+  <div class="section-card" id="covariance-estimation">
+    <h2>5. Covariance estimation</h2>
+
+    <p>
+      This section will contain the interactive plots related to the estimation of the covariance
+      function.
+    </p>
+
+    <div class="plot-list">
+      <h3>Available plots</h3>
+      <p class="placeholder">
+        Plots to be added.
+      </p>
+    </div>
+
+    <a class="back-to-top" href="#top">Back to contents</a>
+  </div>
+
 
   <div class="note">
-    You can zoom, move across the curves, and show or hide methods using the legend.
+    The plots are interactive: it is possible to zoom, move across the curves, inspect values,
+    and show or hide methods using the legend.
   </div>
 
 </body>
 </html>
-
