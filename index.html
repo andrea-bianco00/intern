@@ -274,6 +274,11 @@
             </a>
 
             <div class="cov-formula">
+              Fourier basis functions:
+              \( \phi_k(t) = \sqrt{2}\sin\left(2 \pi k t\right) \)
+            </div>
+
+            <div class="cov-formula">
               Variance function:
               \( \sigma_X^2(t)=\sum_{j=1}^{5}\sum_{k=1}^{5}\frac{e^{-|j-k|}}{5}\phi_j(t)\phi_k(t) \)
             </div>
@@ -289,6 +294,28 @@
             </div>
 
           </li>
+
+          <li>
+            <a href="plots/0_data_generation/covariance_scenario_IV.html">
+              <strong>Covariance Scenario IV</strong>
+            </a>
+
+            <div class="cov-formula">
+              Variance function:
+              \( \sigma_X^2(t) = t \)
+            </div>
+
+            <div class="cov-formula">
+              Brownian Motion correlation function:
+              \( Corr_{\theta=(0.5,1)}(s,t)= \frac{(min(s,t))}{\sqrt{s}\sqrt{t}} \)
+            </div>
+
+            <div class="cov-formula">
+              Covariance function:
+              \( C(s,t)_{\theta=(0.5,1)}= \min(s,t) \)
+            </div>
+          </li>
+
         </ul>
 
       </div>
