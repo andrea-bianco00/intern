@@ -423,64 +423,64 @@
 
   </div>
 
-  <div class="section-card" id="mean-function-estimation">
-
+  <div class="section-card" id="totalvariance-function-estimation">
+ 
     <h2>3. Total variance function estimation</h2>
-
+ 
     <p>
-      The comparison reports the estimation of the true total variance function across different settings, ranging from easier to more challenging cases, and across different covariance scenarios.
+      The comparison reports the estimation of the true total variance function
+      \( \varsigma^2(t) = \sigma_X^2(t) + \sigma_0^2 \) across different
+      covariance scenarios. The total variance estimate is obtained via the
+      <code>mcfda::varfunc</code> procedure, plugging in either the paper
+      mean estimator or the spline mean estimator.
     </p>
-
+ 
     <div class="plot-list">
-
+ 
       <h3>Total variance estimation plots</h3>
-
+ 
       <p>
-        Each interactive plot compares the true total variance function with the estimates obtained using the paper method and the spline method.
+        Each interactive plot compares the true total variance function with the
+        estimates obtained using the paper method and the spline method.
       </p>
-
+ 
       <div class="scenario-block">
-
+ 
         <h4>
           Mean function:
           \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
         </h4>
-
+ 
         <ul>
           <li>
-            <a href="plots/1_mean_estimation/mean_estimation_cov_I.html">
+            <a href="plots/2_total_variance_estimation/tve_estimation_cov_I.html">
               Covariance Scenario I
             </a>
-            <span class="cov-formula">
-              
-            </span>
+            <span class="cov-formula"></span>
           </li>
-
+ 
           <li>
-            <a href="plots/1_mean_estimation/mean_estimation_cov_II.html">
+            <a href="plots/2_total_variance_estimation/tve_estimation_cov_II.html">
               Covariance Scenario II
             </a>
-            <span class="cov-formula">
-              
-            </span>
+            <span class="cov-formula"></span>
           </li>
-
+ 
           <li>
-            <a href="plots/1_mean_estimation/mean_estimation_cov_III.html">
+            <a href="plots/2_total_variance_estimation/tve_estimation_cov_III.html">
               Covariance Scenario III
             </a>
-            <span class="cov-formula">
-              
-            </span>
+            <span class="cov-formula"></span>
           </li>
         </ul>
-
+ 
       </div>
     </div>
-
+ 
     <a class="back-to-top" href="#top">Back to contents</a>
-    
-  </div>  
+ 
+  </div>
+ 
 
 
   <div class="section-card" id="error-variance-estimation">
