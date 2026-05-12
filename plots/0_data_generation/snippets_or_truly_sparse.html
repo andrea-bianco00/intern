@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Snippet vs Truly Sparse Design</title>
+<style>
+  :root {
+    --page-width: min(1700px, 96vw);
+    --border: #d1d5db;
+    --text: #111827;
+    --muted: #4b5563;
+    --blue: #2563eb;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: var(--text);
+  }
+
+  .page {
+    width: var(--page-width);
+    margin: 0 auto;
+    padding: 28px 0 48px;
+  }
+
+  h1 {
+    text-align: center;
+    margin: 0 0 6px;
+    font-size: 30px;
+    font-weight: 750;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-size: 16px;
+  }
+
+  .math {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .plots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px 20px;
+    background: #fafafa;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+  }
+
+  .card h2 {
+    text-align: center;
+    margin: 0 0 8px;
+    font-size: 23px;
+  }
+
+  .description {
+    text-align: center;
+    color: var(--muted);
+    font-size: 15px;
+    min-height: 38px;
+    margin-bottom: 8px;
+  }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 8px 0 12px;
+    font-size: 14px;
+    color: #111827;
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .legend-line {
+    width: 48px;
+    height: 0;
+    border-top-width: 2px;
+    border-top-style: dashed;
+  }
+
+  .legend-line.red { border-color: #ef4444; }
+  .legend-line.blue { border-color: #3b82f6; border-top-style: dotted; }
+
+  .canvas-wrap {
+    width: 100%;
+    height: 720px;
+    background: #ffffff;
+    border: 1px solid #111827;
+    position: relative;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: grab;
+    background: white;
+  }
+
+  canvas.dragging { cursor: grabbing; }
+
+  .toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  button {
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 999px;
+    padding: 7px 13px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  button:hover { background: #f3f4f6; }
+
+  .note {
+    margin-top: 26px;
+    padding: 16px 20px;
+    background: #f3f4f6;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .back {
+    margin-top: 22px;
+    display: inline-block;
+    color: var(--blue);
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .back:hover { text-decoration: underline; }
+
+  @media (max-width: 1050px) {
+    .plots { grid-template-columns: 1fr; }
+    .canvas-wrap { height: 620px; }
+  }
+</style>
+
+<!-- MathJax -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']]
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <h1>Snippet Design vs Truly Sparse Design</h1>
+  <div class="subtitle">
+    Comparison of the observed design pairs
+    <span class="math">(T<sub>ij</sub>, T<sub>ik</sub>)</span>
+  </div>
+
+  <div class="plots">
+    <section class="card">
+      <h2>Snippet Data</h2>
+      <div class="description">
+        Observations from the same subject are concentrated inside short intervals.
+      </div>
+
+      <div class="legend">
+        <span class="legend-item"><span class="legend-line red"></span><span class="math">s = t</span></span>
+        <span class="legend-item"><span class="legend-line blue"></span><span class="math">\(\delta = \max_{i,j}|s_i - t_j| = 0.25\)</span></span>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="snippetCanvas"></canvas>
+      </div>
+
+      <div class="toolbar">
+        <button onclick="plots.snippet.reset()">Reset view</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Truly Sparse Data</h2>
+      <div class="description">
+        Observations from the same subject can be spread across the whole domain.
+      </div>
+
+      <div class="legend">
+        <span class="legend-item"><span class="legend-line red"></span><span class="math">s = t</span></span>
+        <span class="legend-item"><span class="legend-line blue"></span><span class="math">\(\delta = \max_{i,j}|s_i - t_j| = 1\)</span></span>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="sparseCanvas"></canvas>
+      </div>
+
+      <div class="toolbar">
+        <button onclick="plots.sparse.reset()">Reset view</button>
+      </div>
+    </section>
+  </div>
+
+  <a class="back" href="index.html">Back to contents</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  let seed = 52488647;
+  function rand() {
+    seed = (1664525 * seed + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+
+  function runif(a, b) { return a + rand() * (b - a); }
+
+  function rpois(lambda) {
+    const L = Math.exp(-lambda);
+    let k = 0, p = 1;
+    do { k++; p *= rand(); } while (p > L);
+    return k - 1;
+  }
+
+  function generateSnippetPairs(nSubjects = 200, M = 100, delta = 0.25) {
+    const pairs = [];
+    for (let rep = 0; rep < M; rep++) {
+      for (let i = 0; i < nSubjects; i++) {
+        const m = 2 + rpois(2);
+        const center = runif(delta / 2, 1 - delta / 2);
+        const times = [];
+        for (let j = 0; j < m; j++) times.push(runif(center - delta / 2, center + delta / 2));
+        for (let j = 0; j < m; j++) {
+          for (let k = 0; k < m; k++) {
+            if (j !== k) pairs.push([times[j], times[k]]);
+          }
+        }
+      }
+    }
+    return pairs;
+  }
+
+  function generateSparsePairs(nSubjects = 200, M = 100) {
+    const pairs = [];
+    for (let rep = 0; rep < M; rep++) {
+      for (let i = 0; i < nSubjects; i++) {
+        const m = 2 + rpois(2);
+        const times = [];
+        for (let j = 0; j < m; j++) times.push(runif(0, 1));
+        for (let j = 0; j < m; j++) {
+          for (let k = 0; k < m; k++) {
+            if (j !== k) pairs.push([times[j], times[k]]);
+          }
+        }
+      }
+    }
+    return pairs;
+  }
+
+  class InteractivePairPlot {
+    constructor(canvasId, pairs, title) {
+      this.canvas = document.getElementById(canvasId);
+      this.ctx = this.canvas.getContext("2d");
+      this.pairs = pairs;
+      this.title = title;
+      this.base = { xmin: 0, xmax: 1.05, ymin: 0, ymax: 1.05 };
+      this.view = { ...this.base };
+      this.dragging = false;
+      this.last = null;
+      this.margins = { left: 70, right: 24, top: 42, bottom: 62 };
+      this.attachEvents();
+      this.resize();
+    }
+
+    attachEvents() {
+      this.canvas.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const pos = this.eventToData(e);
+        const zoomFactor = e.deltaY < 0 ? 0.86 : 1.16;
+        this.zoomAt(pos.x, pos.y, zoomFactor);
+      }, { passive: false });
+
+      this.canvas.addEventListener("mousedown", (e) => {
+        if (e.button !== 0) return;
+        this.dragging = true;
+        this.last = { x: e.clientX, y: e.clientY };
+        this.canvas.classList.add("dragging");
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!this.dragging) return;
+        const dx = e.clientX - this.last.x;
+        const dy = e.clientY - this.last.y;
+        this.last = { x: e.clientX, y: e.clientY };
+        this.pan(dx, dy);
+      });
+
+      window.addEventListener("mouseup", () => {
+        this.dragging = false;
+        this.canvas.classList.remove("dragging");
+      });
+
+      window.addEventListener("resize", () => this.resize());
+    }
+
+    reset() {
+      this.view = { ...this.base };
+      this.draw();
+    }
+
+    resize() {
+      const rect = this.canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      this.canvas.width = Math.round(rect.width * dpr);
+      this.canvas.height = Math.round(rect.height * dpr);
+      this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      this.width = rect.width;
+      this.height = rect.height;
+      this.plotW = this.width - this.margins.left - this.margins.right;
+      this.plotH = this.height - this.margins.top - this.margins.bottom;
+      this.draw();
+    }
+
+    xScale(x) {
+      return this.margins.left + (x - this.view.xmin) / (this.view.xmax - this.view.xmin) * this.plotW;
+    }
+
+    yScale(y) {
+      return this.margins.top + (this.view.ymax - y) / (this.view.ymax - this.view.ymin) * this.plotH;
+    }
+
+    dataX(px) {
+      return this.view.xmin + (px - this.margins.left) / this.plotW * (this.view.xmax - this.view.xmin);
+    }
+
+    dataY(py) {
+      return this.view.ymax - (py - this.margins.top) / this.plotH * (this.view.ymax - this.view.ymin);
+    }
+
+    eventToData(e) {
+      const r = this.canvas.getBoundingClientRect();
+      return { x: this.dataX(e.clientX - r.left), y: this.dataY(e.clientY - r.top) };
+    }
+
+    zoomAt(cx, cy, factor) {
+      const vx = this.view.xmax - this.view.xmin;
+      const vy = this.view.ymax - this.view.ymin;
+      const nx = Math.max(0.04, Math.min(1.6, vx * factor));
+      const ny = Math.max(0.04, Math.min(1.6, vy * factor));
+      const rx = (cx - this.view.xmin) / vx;
+      const ry = (cy - this.view.ymin) / vy;
+      this.view.xmin = cx - rx * nx;
+      this.view.xmax = this.view.xmin + nx;
+      this.view.ymin = cy - ry * ny;
+      this.view.ymax = this.view.ymin + ny;
+      this.draw();
+    }
+
+    pan(dx, dy) {
+      const shiftX = -dx / this.plotW * (this.view.xmax - this.view.xmin);
+      const shiftY = dy / this.plotH * (this.view.ymax - this.view.ymin);
+      this.view.xmin += shiftX;
+      this.view.xmax += shiftX;
+      this.view.ymin += shiftY;
+      this.view.ymax += shiftY;
+      this.draw();
+    }
+
+    drawDashedLine(x1, y1, x2, y2, color, dash, width = 1.4) {
+      const ctx = this.ctx;
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.setLineDash(dash);
+      ctx.beginPath();
+      ctx.moveTo(this.xScale(x1), this.yScale(y1));
+      ctx.lineTo(this.xScale(x2), this.yScale(y2));
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    clipPlot() {
+      this.ctx.beginPath();
+      this.ctx.rect(this.margins.left, this.margins.top, this.plotW, this.plotH);
+      this.ctx.clip();
+    }
+
+    draw() {
+      const ctx = this.ctx;
+      ctx.clearRect(0, 0, this.width, this.height);
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, this.width, this.height);
+
+      ctx.font = "16px Arial";
+      ctx.fillStyle = "black";
+      ctx.textAlign = "center";
+      ctx.fillText(this.title, this.margins.left + this.plotW / 2, 24);
+
+      ctx.save();
+      this.clipPlot();
+
+      ctx.fillStyle = "rgba(0,0,0,0.28)";
+      for (const p of this.pairs) {
+        if (p[0] < this.view.xmin || p[0] > this.view.xmax || p[1] < this.view.ymin || p[1] > this.view.ymax) continue;
+        const x = this.xScale(p[0]);
+        const y = this.yScale(p[1]);
+        ctx.fillRect(x - 0.65, y - 0.65, 1.3, 1.3);
+      }
+
+      if (this.canvas.id === "snippetCanvas") {
+
+        this.drawDashedLine(
+          -0.5, -0.5,
+          1.6, 1.6,
+          "#ef4444",
+          [8, 6],
+          2.5
+        );
+
+        this.drawDashedLine(
+          -0.5, -0.25,
+          1.6, 1.85,
+          "#3b82f6",
+          [2, 5],
+          2.3
+        );
+
+        this.drawDashedLine(
+          -0.5, -0.75,
+          1.6, 1.35,
+          "#3b82f6",
+          [2, 5],
+          2.3
+        );
+      }
+
+      this.drawDashedLine(1, -0.5, 1, 1.6, "black", [7, 5]);
+      this.drawDashedLine(-0.5, 1, 1.6, 1, "black", [7, 5]);
+
+      ctx.restore();
+
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 1.2;
+      ctx.strokeRect(this.margins.left, this.margins.top, this.plotW, this.plotH);
+
+      this.drawAxes();
+    }
+
+    niceTicks(min, max, n = 6) {
+      const span = max - min;
+      const raw = span / n;
+      const pow = Math.pow(10, Math.floor(Math.log10(raw)));
+      const candidates = [1, 2, 2.5, 5, 10];
+      let step = candidates[0] * pow;
+      for (const c of candidates) {
+        if (raw <= c * pow) { step = c * pow; break; }
+      }
+      const first = Math.ceil(min / step) * step;
+      const ticks = [];
+      for (let v = first; v <= max + 1e-10; v += step) ticks.push(Math.abs(v) < 1e-12 ? 0 : v);
+      return ticks;
+    }
+
+    drawAxes() {
+      const ctx = this.ctx;
+      const xt = this.niceTicks(this.view.xmin, this.view.xmax, 6);
+      const yt = this.niceTicks(this.view.ymin, this.view.ymax, 6);
+
+      ctx.font = "13px Arial";
+      ctx.fillStyle = "black";
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 1;
+
+      for (const v of xt) {
+        const x = this.xScale(v);
+        ctx.beginPath();
+        ctx.moveTo(x, this.margins.top + this.plotH);
+        ctx.lineTo(x, this.margins.top + this.plotH + 6);
+        ctx.stroke();
+        ctx.textAlign = "center";
+        ctx.fillText(v.toFixed(2).replace(/0$/, "").replace(/\.0$/, ".0"), x, this.margins.top + this.plotH + 24);
+      }
+
+      for (const v of yt) {
+        const y = this.yScale(v);
+        ctx.beginPath();
+        ctx.moveTo(this.margins.left - 6, y);
+        ctx.lineTo(this.margins.left, y);
+        ctx.stroke();
+        ctx.textAlign = "right";
+        ctx.fillText(v.toFixed(2).replace(/0$/, "").replace(/\.0$/, ".0"), this.margins.left - 10, y + 4);
+      }
+
+      ctx.font = "16px Times New Roman";
+      ctx.textAlign = "center";
+      ctx.fillText("Tᵢⱼ", this.margins.left + this.plotW / 2, this.height - 18);
+
+      ctx.save();
+      ctx.translate(24, this.margins.top + this.plotH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText("Tᵢₖ", 0, 0);
+      ctx.restore();
+    }
+  }
+
+  const snippetPairs = generateSnippetPairs(200, 100, 0.25);
+  const sparsePairs = generateSparsePairs(200, 100);
+
+  window.plots = {
+    snippet: new InteractivePairPlot("snippetCanvas", snippetPairs, "Snippet design pairs (Tᵢⱼ, Tᵢₖ)"),
+    sparse: new InteractivePairPlot("sparseCanvas", sparsePairs, "Truly sparse design pairs (Tᵢⱼ, Tᵢₖ)")
+  };
+})();
+</script>
+</body>
+</html>
