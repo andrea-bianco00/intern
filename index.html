@@ -542,9 +542,7 @@
     <p>
       The comparison reports the estimation of the true total variance function
       \( \varsigma^2(t) = \sigma_X^2(t) + \sigma_0^2 \) across different
-      covariance scenarios. The total variance estimate is obtained via the
-      <code>mcfda::varfunc</code> procedure, plugging in either the paper
-      mean estimator or the spline mean estimator.
+      covariance scenarios.
     </p>
  
     <div class="plot-list">
@@ -637,21 +635,21 @@
  
         <ul>
           <li>
-            <a href="plots/2_total_variance_estimation/tve_estimation_cov_I.html">
+            <a href="plots/2_total_variance_estimation/">
               Covariance Scenario I
             </a>
             <span class="cov-formula"></span>
           </li>
  
           <li>
-            <a href="plots/2_total_variance_estimation/tve_estimation_cov_II.html">
+            <a href="plots/2_total_variance_estimation/">
               Covariance Scenario II
             </a>
             <span class="cov-formula"></span>
           </li>
  
           <li>
-            <a href="plots/2_total_variance_estimation/tve_estimation_cov_III.html">
+            <a href="plots/2_total_variance_estimation/">
               Covariance Scenario III
             </a>
             <span class="cov-formula"></span>
@@ -696,7 +694,6 @@
   </div>
  
 
-
   <div class="section-card" id="error-variance-estimation">
 
     <h2>5. Error variance estimation</h2>
@@ -722,22 +719,157 @@
 
   <div class="section-card" id="variance-function-estimation">
 
-    <h2>6. Variance function estimation</h2>
-
+    <h2>6. Variance Function Estimation</h2>
+ 
     <p>
-      This section will contain the interactive plots related to the estimation of the marginal variance function.
+      The comparison reports the estimation of the true variance function
+      \(\sigma_X^2(t) \) across different covariance scenarios.
     </p>
-
+ 
     <div class="plot-list">
-
-      <h3>Different Scenarios</h3>
-
-      <p class="placeholder">
-        Plots to be added.
+ 
+      <h3>Variance Function Estimation plots - Snippet Scenario</h3>
+ 
+      <p>
+        Each interactive plot compares the true variance function with the
+        estimates obtained.
       </p>
+ 
+      <div class="scenario-block">
+ 
+        <h4>
+          Mean function:
+          \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/4_variance_estimation/vfe_estimation_covI.html">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/4_variance_estimation/vfe_estimation_covII.html">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/4_variance_estimation/vfe_estimation_covIII.html">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+      </div>
 
+      <div class="scenario-block">
+        <h4>
+          Mean function:
+          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+ 
+      </div>
     </div>
 
+    <div class="plot-list">
+ 
+      <h3>Variance Function Estimation plots - Real Sparse Scenario</h3>
+ 
+      <p>
+        Each interactive plot compares the true variance function with the
+        estimates obtained.
+      </p>
+ 
+      <div class="scenario-block">
+ 
+        <h4>
+          Mean function:
+          \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="scenario-block">
+        <h4>
+          Mean function:
+          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+ 
+      </div>
+    </div>
+ 
     <a class="back-to-top" href="#top">Back to contents</a>
 
   </div>
