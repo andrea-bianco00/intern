@@ -236,12 +236,7 @@
               \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
             </a>
           </li>
-
-          <li>
-            <a href="plots/0_data_generation/real_mean_functions_difficult_2.html">
-              \( \mu_3(t) = \sqrt{t(1-t)} \, \sin\left(\frac{2\pi(1+0.05)}{t+0.05}\right) \)
-            </a>
-          </li>
+          
         </ul>
 
       </div>
@@ -324,27 +319,6 @@
               \( Corr(s,t)=\dfrac{C(s,t)}{\sqrt{\sigma_X^2(s)\sigma_X^2(t)}} \)
             </div>
 
-          </li>
-
-          <li>
-            <a href="plots/0_data_generation/covariance_scenario_IV.html">
-              <strong>Covariance Scenario IV</strong>
-            </a>
-
-            <div class="cov-formula">
-              Variance function:
-              \( \sigma_X^2(t) = t \)
-            </div>
-
-            <div class="cov-formula">
-              Brownian Motion correlation function:
-              \( Corr_{\theta=(0.5,1)}(s,t)= \frac{(min(s,t))}{\sqrt{s}\sqrt{t}} \)
-            </div>
-
-            <div class="cov-formula">
-              Covariance function:
-              \( C(s,t)_{\theta=(0.5,1)}= \min(s,t) \)
-            </div>
           </li>
 
         </ul>
@@ -878,7 +852,7 @@
 
   <div class="section-card" id="correlation-parameter-estimation">
 
-    <h2>7. Estimation of the parameters of the correlation function</h2>
+    <h2>7. Estimation of the parameters of the correlation function \(\rho_{\theta = (\theta_1, \theta_2)}(s,t)\)</h2>
 
     <p>
       The comparison reports the estimation of \(\theta = (\theta_1, \theta_2)\) of \(\rho_{\theta}(s,t)\) across different covariance scenarios.
@@ -901,21 +875,21 @@
  
         <ul>
           <li>
-            <a href="plots/4_variance_estimation/vfe_estimation_covI.html">
+            <a href="plots/">
               Covariance Scenario I
             </a>
             <span class="cov-formula"></span>
           </li>
  
           <li>
-            <a href="plots/4_variance_estimation/vfe_estimation_covII.html">
+            <a href="plots/">
               Covariance Scenario II
             </a>
             <span class="cov-formula"></span>
           </li>
  
           <li>
-            <a href="plots/4_variance_estimation/vfe_estimation_covIII.html">
+            <a href="plots/">
               Covariance Scenario III
             </a>
             <span class="cov-formula"></span>
@@ -1036,17 +1010,150 @@
     <h2>8. Correlation function estimation</h2>
 
     <p>
-      This section will contain the interactive plots related to the estimation of the correlation function.
+      The comparison reports the estimation of \(\rho_{\hat \theta}(s,t)\) across different covariance scenarios.
     </p>
+ 
+    <div class="plot-list">
+ 
+      <h3> \(\rho_{\hat \theta}(s,t)\) Estimation plots - Snippet Scenario</h3>
+ 
+      <p>
+        Each interactive plot compares the true correlation parameters with the estimates obtained.
+      </p>
+ 
+      <div class="scenario-block">
+ 
+        <h4>
+          Mean function:
+          \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="scenario-block">
+        <h4>
+          Mean function:
+          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+ 
+      </div>
+    </div>
 
     <div class="plot-list">
-
-      <h3>Different Scenarios</h3>
-
-      <p class="placeholder">
-        Plots to be added.
+ 
+      <h3> \(\rho_{\hat \theta}(s,t)\) Estimation plots - Real Sparse Scenario</h3>
+ 
+      <p>
+        Each interactive plot compares the true correlation parameters with the
+        estimates obtained.
       </p>
+ 
+      <div class="scenario-block">
+ 
+        <h4>
+          Mean function:
+          \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+      </div>
 
+      <div class="scenario-block">
+        <h4>
+          Mean function:
+          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+ 
+      </div>
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
@@ -1059,17 +1166,150 @@
     <h2>9. Covariance estimation</h2>
 
     <p>
-      This section will contain the interactive plots related to the estimation of the covariance function.
+      The comparison reports the estimation of \(C(s,t)\) across different covariance scenarios.
     </p>
+ 
+    <div class="plot-list">
+ 
+      <h3> \(C(s,t)\) Estimation plots - Snippet Scenario</h3>
+ 
+      <p>
+        Each interactive plot compares the true correlation parameters with the estimates obtained.
+      </p>
+ 
+      <div class="scenario-block">
+ 
+        <h4>
+          Mean function:
+          \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="scenario-block">
+        <h4>
+          Mean function:
+          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+ 
+      </div>
+    </div>
 
     <div class="plot-list">
-
-      <h3>Different Scenarios</h3>
-
-      <p class="placeholder">
-        Plots to be added.
+ 
+      <h3> \(C(s,t)\) Estimation plots - Real Sparse Scenario</h3>
+ 
+      <p>
+        Each interactive plot compares the true correlation parameters with the
+        estimates obtained.
       </p>
+ 
+      <div class="scenario-block">
+ 
+        <h4>
+          Mean function:
+          \( \mu_1(t) = 2t^2 \cos(2\pi t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+      </div>
 
+      <div class="scenario-block">
+        <h4>
+          Mean function:
+          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
+        </h4>
+ 
+        <ul>
+          <li>
+            <a href="plots/">
+              Covariance Scenario I
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario II
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+ 
+          <li>
+            <a href="plots/">
+              Covariance Scenario III
+            </a>
+            <span class="cov-formula"></span>
+          </li>
+        </ul>
+ 
+      </div>
     </div>
 
     <a class="back-to-top" href="#top">Back to contents</a>
