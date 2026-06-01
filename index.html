@@ -163,6 +163,8 @@
     This page brings together the main plots produced during the internship. The results are organized according to the following structure:
   </p>
 
+  <!-- CONTENTS ############################################################################################################################ -->
+
   <div class="toc">
     <h2>Contents</h2>
 
@@ -177,6 +179,8 @@
       <li><a href="#covariance-estimation">Covariance function estimation</a></li>
     </ol>
   </div>
+
+  <!-- TYPE OF SPARSITY ############################################################################################################################ -->
 
   <div class="section-card" id="type-of-sparsity">
 
@@ -205,7 +209,6 @@
     <a class="back-to-top" href="#top">Back to contents</a>
 
   </div>
-
 
   <div class="section-card" id="data-generation">
 
@@ -262,7 +265,7 @@
 
             <div class="cov-formula">
               Covariance function:
-              \( C(s,t)=\sqrt{\sigma_X^2(s)}\,\sqrt{\sigma_X^2(t)}\,Corr_{\theta=(0.5,1)}(s,t)=\sqrt{\sqrt{s}\exp\left(-\frac{(s-0.1)^2}{10}\right)+1}\,\sqrt{\sqrt{t}\exp\left(-\frac{(t-0.1)^2}{10}\right)+1}\,\exp(-|s-t|) \)
+              \( C(s,t)=\sqrt{\sigma_X^2(s)}\,\sqrt{\sigma_X^2(t)}\,Corr_{\theta=(0.5,1)}(s,t)\)
             </div>
           </li>
 
@@ -330,6 +333,7 @@
 
   </div>
 
+  <!-- MEAN FUNCTION ############################################################################################################################ -->
 
   <div class="section-card" id="mean-function-estimation">
 
@@ -509,6 +513,8 @@
 
   </div>
 
+  <!-- TOTAL VARIANCE FUNCTION ############################################################################################################################ -->
+
   <div class="section-card" id="totalvariance-function-estimation">
  
     <h2>4. Total Variance function \(\varsigma^2(t)\) estimation</h2>
@@ -667,6 +673,7 @@
  
   </div>
 
+  <!-- VARIANCE FUNCTION ############################################################################################################################ -->
 
   <div class="section-card" id="variance-function-estimation">
 
@@ -825,13 +832,14 @@
 
   </div>
 
+  <!-- CORRELATION PARAMETER ESTIMATION ############################################################################################################################ -->
 
   <div class="section-card" id="correlation-parameter-estimation">
 
-    <h2>6. Estimation of the parameters of the Correlation function \(\rho_{\theta = (\theta_1, \theta_2)}(s,t)\)</h2>
+    <h2>6. Estimation of the parameters of the Matern Correlation function \(\rho_{\theta = (\theta_1, \theta_2)}(s,t)\)</h2>
 
     <p>
-      The comparison reports the estimation of \(\theta = (\theta_1, \theta_2)\) across different covariance scenarios.
+      We are facing the challenge of parameter estimation in the Mat&eacute;rn correlation function, which arises from the non-identifiability of \((\theta_1, \theta_2)\) under fixed-domain asymptotics. When the observation domain is bounded and fixed, different combinations of \((\theta_1, \theta_2)\) can produce nearly identical correlation functions over the observable range of distances, making it impossible to recover the two parameters separately from the data regardless of the sample size.
     </p>
  
     <div class="plot-list">
@@ -856,52 +864,7 @@
             </a>
             <span class="cov-formula"></span>
           </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario II
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario III
-            </a>
-            <span class="cov-formula"></span>
-          </li>
         </ul>
-      </div>
-
-      <div class="scenario-block">
-        <h4>
-          Mean function:
-          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
-        </h4>
- 
-        <ul>
-          <li>
-            <a href="plots/">
-              Covariance Scenario I
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario II
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario III
-            </a>
-            <span class="cov-formula"></span>
-          </li>
-        </ul>
- 
       </div>
     </div>
 
@@ -928,58 +891,15 @@
             </a>
             <span class="cov-formula"></span>
           </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario II
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario III
-            </a>
-            <span class="cov-formula"></span>
-          </li>
         </ul>
-      </div>
-
-      <div class="scenario-block">
-        <h4>
-          Mean function:
-          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
-        </h4>
- 
-        <ul>
-          <li>
-            <a href="plots/">
-              Covariance Scenario I
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario II
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario III
-            </a>
-            <span class="cov-formula"></span>
-          </li>
-        </ul>
- 
       </div>
     </div>
  
     <a class="back-to-top" href="#top">Back to contents</a>
 
   </div>
+
+  <!-- CORRELATION FUNCTION ESTIMATION ############################################################################################################################ -->
 
   <div class="section-card" id="correlation-estimation">
 
@@ -1028,38 +948,6 @@
         </ul>
       </div>
 
-      <div class="scenario-block">
-        <h4>
-          Mean function:
-          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
-        </h4>
- 
-        <ul>
-          <li>
-            <a href="plots/">
-              Covariance Scenario I
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario II
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario III
-            </a>
-            <span class="cov-formula"></span>
-          </li>
-        </ul>
- 
-      </div>
-    </div>
-
     <div class="plot-list">
  
       <h3> \(\rho_{\hat \theta}(s,t)\) Estimation plots - Real Sparse Scenario</h3>
@@ -1100,42 +988,11 @@
         </ul>
       </div>
 
-      <div class="scenario-block">
-        <h4>
-          Mean function:
-          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
-        </h4>
- 
-        <ul>
-          <li>
-            <a href="plots/">
-              Covariance Scenario I
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario II
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario III
-            </a>
-            <span class="cov-formula"></span>
-          </li>
-        </ul>
- 
-      </div>
-    </div>
-
     <a class="back-to-top" href="#top">Back to contents</a>
 
   </div>
 
+  <!-- COVARIANCE FUNCTION ESTIMATION ############################################################################################################################ -->
 
   <div class="section-card" id="covariance-estimation">
 
@@ -1183,37 +1040,6 @@
           </li>
         </ul>
       </div>
-
-      <div class="scenario-block">
-        <h4>
-          Mean function:
-          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
-        </h4>
- 
-        <ul>
-          <li>
-            <a href="plots/">
-              Covariance Scenario I
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario II
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario III
-            </a>
-            <span class="cov-formula"></span>
-          </li>
-        </ul>
- 
-      </div>
     </div>
 
     <div class="plot-list">
@@ -1254,37 +1080,6 @@
             <span class="cov-formula"></span>
           </li>
         </ul>
-      </div>
-
-      <div class="scenario-block">
-        <h4>
-          Mean function:
-          \( \mu_2(t) = \sin(8\pi t)\exp(-t) \)
-        </h4>
- 
-        <ul>
-          <li>
-            <a href="plots/">
-              Covariance Scenario I
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario II
-            </a>
-            <span class="cov-formula"></span>
-          </li>
- 
-          <li>
-            <a href="plots/">
-              Covariance Scenario III
-            </a>
-            <span class="cov-formula"></span>
-          </li>
-        </ul>
- 
       </div>
     </div>
 
