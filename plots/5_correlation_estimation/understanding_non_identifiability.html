@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matérn Correlation Function</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #111111;
+      padding: 16px 34px 28px;
+    }
+
+    .page {
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 23px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .formula {
+      text-align: center;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 12px 0;
+      border-top: 1px solid #e5e5e5;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .control-box {
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      padding: 9px 11px;
+      background: #fbfbfb;
+    }
+
+    .control-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    label {
+      display: grid;
+      grid-template-columns: 22px 1fr 46px;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      margin: 6px 0;
+      color: #333333;
+    }
+
+    input[type="range"] { width: 100%; }
+
+    .val {
+      text-align: right;
+      font-weight: 700;
+      color: #111111;
+    }
+
+    .surface-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      border-top: 1px solid #e5e5e5;
+      padding-top: 14px;
+    }
+
+    .surface-panel {
+      min-width: 0;
+    }
+
+    .surface-title {
+      text-align: center;
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .surface-subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #444444;
+      margin-bottom: 4px;
+    }
+
+    .surface-plot {
+      height: 430px;
+    }
+
+    @media (max-width: 1100px) {
+      .controls { grid-template-columns: 1fr; }
+      .surface-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Matérn Correlation Function</h1>
+    <div class="formula">ρ(s,t) = Matérn(|s − t|; ν, ρ)</div>
+
+    <div class="controls">
+      <div class="control-box">
+        <div class="control-title"><span class="dot" style="background:#000000"></span>Pair 1</div>
+        <label>ν <input id="nu1" type="range" min="0.5" max="10" step="0.5" value="0.5"><span class="val" id="nu1v">0.5</span></label>
+        <label>ρ <input id="rho1" type="range" min="0.5" max="10" step="0.01" value="1.00"><span class="val" id="rho1v">1.00</span></label>
+      </div>
+
+      <div class="control-box">
+        <div class="control-title"><span class="dot" style="background:#e41a1c"></span>Pair 2</div>
+        <label>ν <input id="nu2" type="range" min="0.5" max="10" step="0.5" value="1.0"><span class="val" id="nu2v">1.0</span></label>
+        <label>ρ <input id="rho2" type="range" min="0.5" max="10" step="0.01" value="1.25"><span class="val" id="rho2v">1.25</span></label>
+      </div>
+
+      <div class="control-box">
+        <div class="control-title"><span class="dot" style="background:#377eb8"></span>Pair 3</div>
+        <label>ν <input id="nu3" type="range" min="0.5" max="10" step="0.5" value="1.5"><span class="val" id="nu3v">1.5</span></label>
+        <label>ρ <input id="rho3" type="range" min="0.5" max="10" step="0.01" value="1.55"><span class="val" id="rho3v">1.55</span></label>
+      </div>
+
+      <div class="control-box">
+        <div class="control-title"><span class="dot" style="background:#4daf4a"></span>Pair 4</div>
+        <label>ν <input id="nu4" type="range" min="0.5" max="10" step="0.5" value="2.5"><span class="val" id="nu4v">2.5</span></label>
+        <label>ρ <input id="rho4" type="range" min="0.5" max="10" step="0.01" value="2.00"><span class="val" id="rho4v">2.00</span></label>
+      </div>
+
+      <div class="control-box">
+        <div class="control-title"><span class="dot" style="background:#ff2d55"></span>Snippet band</div>
+        <label>δ <input id="delta" type="range" min="0.05" max="0.90" step="0.05" value="0.25"><span class="val" id="deltav">0.25</span></label>
+      </div>
+    </div>
+
+    <div class="surface-grid">
+      <div class="surface-panel">
+        <div class="surface-title">Pair 1</div>
+        <div class="surface-subtitle" id="title1"></div>
+        <div id="surface1" class="surface-plot"></div>
+      </div>
+      <div class="surface-panel">
+        <div class="surface-title">Pair 2</div>
+        <div class="surface-subtitle" id="title2"></div>
+        <div id="surface2" class="surface-plot"></div>
+      </div>
+      <div class="surface-panel">
+        <div class="surface-title">Pair 3</div>
+        <div class="surface-subtitle" id="title3"></div>
+        <div id="surface3" class="surface-plot"></div>
+      </div>
+      <div class="surface-panel">
+        <div class="surface-title">Pair 4</div>
+        <div class="surface-subtitle" id="title4"></div>
+        <div id="surface4" class="surface-plot"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const N = 95;
+    const grid = Array.from({ length: N }, (_, i) => i / (N - 1));
+
+    const gammaCache = new Map();
+    const maternCache = new Map();
+
+    function logGamma(z) {
+      const key = z.toFixed(6);
+      if (gammaCache.has(key)) return gammaCache.get(key);
+
+      const p = [
+        676.5203681218851,
+        -1259.1392167224028,
+        771.32342877765313,
+        -176.61502916214059,
+        12.507343278686905,
+        -0.13857109526572012,
+        9.9843695780195716e-6,
+        1.5056327351493116e-7
+      ];
+
+      if (z < 0.5) {
+        const value = Math.log(Math.PI) - Math.log(Math.sin(Math.PI * z)) - logGamma(1 - z);
+        gammaCache.set(key, value);
+        return value;
+      }
+
+      z -= 1;
+      let x = 0.99999999999980993;
+      for (let i = 0; i < p.length; i++) x += p[i] / (z + i + 1);
+      const t = z + p.length - 0.5;
+      const value = 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(x);
+      gammaCache.set(key, value);
+      return value;
+    }
+
+    function besselKIntegral(nu, x) {
+      if (x < 1e-7) return Infinity;
+
+      const upper = 12;
+      const m = 80;
+      const h = upper / m;
+      let sum = 0;
+
+      for (let i = 0; i <= m; i++) {
+        const u = i * h;
+        const term = Math.exp(-x * Math.cosh(u)) * Math.cosh(nu * u);
+        const weight = (i === 0 || i === m) ? 1 : (i % 2 === 0 ? 2 : 4);
+        sum += weight * term;
+      }
+
+      return (h / 3) * sum;
+    }
+
+    function matern(h, nu, rho) {
+      if (h < 1e-10) return 1;
+
+      const x = Math.sqrt(2 * nu) * h / rho;
+      if (x < 1e-5) return 1;
+
+      const key = `${h.toFixed(5)}|${nu.toFixed(1)}|${rho.toFixed(2)}`;
+      if (maternCache.has(key)) return maternCache.get(key);
+
+      const logCoef = (1 - nu) * Math.log(2) - logGamma(nu);
+      const k = besselKIntegral(nu, x);
+      let value = Math.exp(logCoef + nu * Math.log(x)) * k;
+
+      if (!Number.isFinite(value)) value = 1;
+      value = Math.max(0, Math.min(1, value));
+
+      maternCache.set(key, value);
+      return value;
+    }
+
+    function getPairs() {
+      return [1, 2, 3, 4].map(i => ({
+        nu: Number(document.getElementById(`nu${i}`).value),
+        rho: Number(document.getElementById(`rho${i}`).value)
+      }));
+    }
+
+    function corrSurface(nu, rho) {
+      return grid.map(t => grid.map(s => matern(Math.abs(s - t), nu, rho)));
+    }
+
+    function updateLabels(pairs, delta) {
+      pairs.forEach((p, idx) => {
+        const i = idx + 1;
+        document.getElementById(`nu${i}v`).textContent = p.nu.toFixed(1);
+        document.getElementById(`rho${i}v`).textContent = p.rho.toFixed(2);
+        document.getElementById(`title${i}`).textContent = `ν = ${p.nu.toFixed(1)}, ρ = ${p.rho.toFixed(2)}`;
+      });
+      document.getElementById('deltav').textContent = delta.toFixed(2);
+    }
+
+    function snippetBandLines(delta) {
+      return [
+        {
+          type: 'line', xref: 'x', yref: 'y',
+          x0: 0, x1: 1 - delta, y0: delta, y1: 1,
+          line: { color: '#ff2d55', width: 2, dash: 'dash' }, layer: 'above'
+        },
+        {
+          type: 'line', xref: 'x', yref: 'y',
+          x0: delta, x1: 1, y0: 0, y1: 1 - delta,
+          line: { color: '#ff2d55', width: 2, dash: 'dash' }, layer: 'above'
+        }
+      ];
+    }
+
+    function heatLayout(delta) {
+      return {
+        margin: { l: 58, r: 68, t: 4, b: 50 },
+        xaxis: {
+          title: { text: 's', standoff: 10 },
+          range: [-0.18, 1.18],
+          showline: true,
+          linewidth: 1.4,
+          linecolor: '#111111',
+          gridcolor: '#e8e8e8',
+          zeroline: false,
+          dtick: 0.25
+        },
+        yaxis: {
+          title: { text: 't', standoff: 10 },
+          range: [-0.12, 1.18],
+          showline: true,
+          linewidth: 1.4,
+          linecolor: '#111111',
+          gridcolor: '#e8e8e8',
+          zeroline: false,
+          dtick: 0.25,
+          scaleanchor: 'x'
+        },
+        shapes: snippetBandLines(delta),
+        paper_bgcolor: '#ffffff',
+        plot_bgcolor: '#ffffff'
+      };
+    }
+
+    function heatTrace(z) {
+      return {
+        x: grid,
+        y: grid,
+        z,
+        type: 'heatmap',
+        zmin: 0,
+        zmax: 1,
+        colorscale: 'Viridis',
+        showscale: true,
+        colorbar: {
+          thickness: 12,
+          len: 0.72,
+          tickfont: { size: 11 }
+        },
+        hovertemplate: 's = %{x:.3f}<br>t = %{y:.3f}<br>ρ = %{z:.4f}<extra></extra>'
+      };
+    }
+
+    function update() {
+      const pairs = getPairs();
+      const delta = Number(document.getElementById('delta').value);
+      updateLabels(pairs, delta);
+
+      pairs.forEach((p, i) => {
+        Plotly.react(`surface${i + 1}`, [heatTrace(corrSurface(p.nu, p.rho))], heatLayout(delta), {
+          responsive: true,
+          displayModeBar: false
+        });
+      });
+    }
+
+    ['nu1','rho1','nu2','rho2','nu3','rho3','nu4','rho4','delta'].forEach(id => {
+      document.getElementById(id).addEventListener('input', update);
+    });
+
+    update();
+  </script>
+</body>
+</html>
