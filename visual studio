@@ -9,3 +9,16 @@ git add .
 git commit -m "Update project files"
 git push origin main
 
+#######################################################
+
+cd "C:\Users\Predator\Desktop\intern"
+code .
+
+# Pagina online:
+# https://andrea-bianco00.github.io/intern/
+
+# PER PUSHARE ####
+git status
+git add .
+git commit -m "Update project files"
+git push origin main
